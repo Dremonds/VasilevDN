@@ -1,0 +1,322 @@
+Ответы к заданию
+
+ Дан номер дня – целое число от 1 до 31 и месяца — целое число в диапазоне 1–12 (1 — январь, 2 — февраль и т. д.). Вывести дату в виде текста (например, «пятое января»).
+
+
+#include <iostream>
+#include <stdlib.h>
+
+using namespace std;
+string num[31] = { "Первое", "Второе", "Третье", "Четвертое", "Пятое", "Шестое", "Седьмое", "Восьмое", "Девятое", "Десятое", "Одиннадцатое", "Двенадцатое", "Тринадцатое", "Четырнадцатое", "Пятнадцатое", "Шестнадцатое", "Семнадцатое", "Восемнадцатое", "Девятнадцатое", "Двадцатое", "Двадцать первое", "Двадцать второе", "Двадцать третье", "Двадцать четвертое", "Двадцать пятое", "Двадцать шестое", "Двадцать седьмое", "Двадцать восьмое", "Двадцать девятое", "Тридцатое", "Тридцать первое" };
+string arr[] = { "Января","Февраля", "Марта","Апреля","Мая", "Июня","Июля","Августа", "Сентября","Октября","ноября", "Декабря" };
+int j,i;
+
+int main() {
+	srand(time(0));//функция для генерации случайных чисел
+	setlocale(LC_ALL, "Russian");
+	j = rand()% 31;//присваивание переменной случайное значение от 0 до 30
+	cout << num[j]<<" ";
+	i = rand() % 12;
+	cout << arr[i];
+	return 0;
+}
+
+ Робот может перемещаться в четырех направлениях («С» — север, «З» — запад, «Ю» — юг, «В» — восток) и принимать три цифровые команды: 0 — продолжать движение, 1 — поворот налево, −1 — поворот направо. Дан символ C — исходное направление робота и целое число N — посланная ему команда. Вывести направление робота после выполнения полученной команды
+
+#include <iostream>
+#include <locale.h>
+using namespace std;
+
+int main() 
+{
+    setlocale(LC_ALL, "Russian");
+    int n;
+    char c;
+    //n — север, w — запад, s — юг, e — восток
+    cout << "Исходное направление: ";
+    cin >> c;
+    cout << "Команда: ";
+    cin >> n;
+    //В зависимости от исходного направления будет выбран соотв. кейс 
+    switch (c) 
+    {
+        case 'n':
+        //Внутри кейса идет выбор в зависимости от команды
+        switch (n) {
+        case 1:c = 'w';
+            break;
+        case 0:c = 'n';
+            break;
+        case -1:c = 'e';
+            break;
+        }
+        break;
+    case 'e':
+        switch (n) {
+        case 1:c = 'n';
+            break;
+        case 0:c = 'e';
+            break;
+        case -1:c = 's';
+            break;
+        }
+    case 's':
+        switch (n) {
+        case 1:c = 'e';
+            break;
+        case 0:c = 's';
+            break;
+        case -1:c = 'w';
+            break;
+        }
+        break;
+    case 'w':switch (n) {
+        case 1:c = 's';
+            break;
+        case 0:c = 'w';
+            break;
+        case -1:c = 's';
+            break;
+        }
+    }
+    cout << c;
+    return 0;
+}
+
+
+ Дано целое число в диапазоне 10–40, определяющее количество учебных заданий по некоторой теме. Вывести строку-описание указанного количества заданий, обеспечив правильное согласование числа со словами «учебное задание», например: 18 — «восемнадцать учебных заданий».
+
+
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    int n;
+    cout << "Количество заданий:";
+    cin >> n;
+
+    if (n / 10 == 1)//После деления целое число равно 1
+        switch (n) {
+        case 10:cout << "десять учебных заданий.";break;
+        case 11:cout << "одинадцать учебных заданий.";break;
+        case 12:cout << "двенадцать учебных заданий.";break;
+        case 13:cout << "тринадцать учебных заданий.";break;
+        case 14:cout << "четырнадцать учебных заданий.";break;
+        case 15:cout << "пятнадцать учебных заданий.";break;
+        case 16:cout << "шестнадцать учебных заданий.";break;
+        case 17:cout << "семнадцать учебных заданий.";break;
+        case 18:cout << "восемнадцать учебных заданий.";break;
+        case 19:cout << "девятнадцать учебных заданий.";break;
+        }
+    else {
+        switch (n / 10) {//после деления целое число равно 2, 3 или 4
+        case 2:cout << "двадцать ";break;
+        case 3:cout << "тридцать ";break;
+        case 4:cout << "сорок ";break;
+        }
+        switch (n % 10) {//остаток от деления равен числу от 1 до 9
+        case 1:cout << "одно ";break;
+        case 2:cout << "два ";break;
+        case 3:cout << "три ";break;
+        case 4:cout << "четыре ";break;
+        case 5:cout << "пять ";break;
+        case 6:cout << "шесть ";break;
+        case 7:cout << "семь ";break;
+        case 8:cout << "восемь ";break;
+        case 9:cout << "девять ";break;
+        }
+        switch (n % 10) {//свич для правильного склонения 
+        case 0:cout << "учебных задания."; break;
+        case 5:cout << "учебных задания."; break;
+        case 6:cout << "учебных задания."; break;
+        case 7:cout << "учебных задания."; break;
+        case 8:cout << "учебных задания."; break;
+        case 9:cout << "учебных задания."; break;
+        case 2:cout << "учебных задания."; break;
+        case 3:cout << "учебных задания."; break;
+        case 4:cout << "учебных задания.";break;
+        case 1:cout << "учебное задание."; break;
+        }
+    }
+    return 0;
+}
+
+
+ Дано целое число в диапазоне 100–999. Вывести строку-описание данного числа, например: 256 — «двести пятьдесят шесть», 814 — «восемьсот четырнадцать».
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    int n;
+    cout << "Целое число:";
+    cin >> n;
+
+    if ((n >= 100) && (n <= 999)) {//условие нужно для числа в промедутке между 100 и 999
+        switch (n / 100) {//определение сотен
+        case 1:cout << "сто "; break;
+        case 2:cout << "двести "; break;
+        case 3:cout << "тристо "; break;
+        case 4:cout << "четыресто "; break;
+        case 5:cout << "пятьсот "; break;
+        case 6:cout << "шестьсот "; break;
+        case 7:cout << "семьсот "; break;
+        case 8:cout << "восемьсот "; break;
+        case 9:cout << "девятьсот "; break;
+        }
+    }
+    if ((n % 100) / 10 == 1) //определение десяток
+        switch (n % 100) {
+        case 10:cout << "десять"; break;
+        case 11:cout << "одинадцать "; break;
+        case 12:cout << "двенадцать "; break;
+        case 13:cout << "тринадцать "; break;
+        case 14:cout << "четырнадцать"; break;
+        case 15:cout << "пятнадцать "; break;
+        case 16:cout << "шестнадцать "; break;
+        case 17:cout << "семнадцать "; break;
+        case 18:cout << "восемнадцать "; break;
+        case 19:cout << "девятнадцать "; break;
+        }
+    else
+        switch ((n % 100) / 10) {
+        case 2:cout << "двадцать "; break;
+        case 3:cout << "тридцать "; break;
+        case 4:cout << "сорок "; break;
+        case 5:cout << "пятьдесят "; break;
+        case 6:cout << "шестдесят "; break;
+        case 7:cout << "семдесят "; break;
+        case 8:cout << "восемьдесят "; break;
+        case 9:cout << "девяносто "; break;
+        }
+
+        switch (n % 10) {//определение единиц
+        case 1: cout << "Один"; break;
+        case 2: cout << "два"; break;
+        case 3: cout << "три"; break;
+        case 4: cout << "четыре"; break;
+        case 5: cout << "пять"; break;
+        case 6: cout << "шесть"; break;
+        case 7: cout << "семь"; break;
+        case 8: cout << "восемь"; break;
+        case 9: cout << "девять"; break;
+        }
+    return 0;
+}
+
+ В восточном календаре принят 60-летний цикл, состоящий из 12- летних подциклов, обозначаемых названиями цвета: зеленый, красный, желтый, белый и черный. В каждом подцикле годы носят названия животных: крысы, коровы, тигра, зайца, дракона, змеи, лошади, овцы, обезьяны, курицы, собаки и свиньи. По номеру года определить его название, если 1984 год — начало цикла: «год зеленой крысы»
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    int n;
+    cout << "Год: ";
+    cin >> n;
+    cout << "год ";
+    switch (n % 10) {
+    case 0:
+    case 1:cout << "бел"; break;
+    case 2:
+    case 3:cout << "черн"; break;
+    case 4:
+    case 5:cout << "зелен"; break;
+    case 6:
+    case 7:cout << "красн"; break;
+    case 8:
+    case 9:cout << "желт"; break;
+    }
+    switch ((n + 1) % 5) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 9:
+    case 10:
+    case 11:cout << "ой "; break;
+    case 6:
+    case 7:
+    case 8:cout << "ого "; break;
+    }
+    switch ((n + 8) % 12) {
+    case 0:cout << "крысы"; break;
+    case 1:cout << "коровы"; break;
+    case 2:cout << "тигра"; break;
+    case 3:cout << "зайца"; break;
+    case 4:cout << "дракона"; break;
+    case 5:cout << "змеи"; break;
+    case 6:cout << "лошади"; break;
+    case 7:cout << "овцы"; break;
+    case 8:cout << "обезъяны"; break;
+    case 9:cout << "курицы"; break;
+    case 10:cout << "собаки"; break;
+    case 11:cout << "свиньи"; break;
+    }
+  
+    return 0;
+}
+
+
+ В восточном календаре принят 60-летний цикл, состоящий из 12- летних подциклов, обозначаемых названиями цвета: зеленый, красный, желтый, белый и черный. В каждом подцикле годы носят названия животных: крысы, коровы, тигра, зайца, дракона, змеи, лошади, овцы, обезьяны, курицы, собаки и свиньи. По номеру года определить его название, если 1984 год — начало цикла: «год зеленой крысы».
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    int n;
+    cout << "Год: ";
+    cin >> n;
+    cout << "год ";
+    switch (n % 10) {//определение цвета подцикла
+    case 0:
+    case 1:cout << "бел"; break;
+    case 2:
+    case 3:cout << "черн"; break;
+    case 4:
+    case 5:cout << "зелен"; break;
+    case 6:
+    case 7:cout << "красн"; break;
+    case 8:
+    case 9:cout << "желт"; break;
+    }
+    switch (n % 5) {//для правильного окончания
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 9:
+    case 10:
+    case 11:cout << "ой "; break;
+    case 6:
+    case 7:
+    case 8:cout << "ого "; break;
+    }
+    switch ((n-4) % 12) {//определение тотемного животного
+    case 0:cout << "крысы"; break;
+    case 1:cout << "коровы"; break;
+    case 2:cout << "тигра"; break;
+    case 3:cout << "зайца"; break;
+    case 4:cout << "дракона"; break;
+    case 5:cout << "змеи"; break;
+    case 6:cout << "лошади"; break;
+    case 7:cout << "овцы"; break;
+    case 8:cout << "обезъяны"; break;
+    case 9:cout << "курицы"; break;
+    case 10:cout << "собаки"; break;
+    case 11:cout << "свиньи"; break;
+    }
+  
+    return 0;
+}
